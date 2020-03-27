@@ -47,7 +47,7 @@ var recreateViews = false;
 var currentViewVersion = 1;
 
 // This ensures that unit tests do not try to record stats.
-var ready = Promise.reject(new Error('not initialized'));
+var ready = null;//Promise.reject(new Error('not initialized'));
 
 function init(dbname, options) {
     options = options || {};

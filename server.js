@@ -16,7 +16,7 @@ var dataAccess = require('./dataaccess-couch');
 
 var argv = require('optimist')
     .usage('$0 [--debug] [--recreate-views] [--port <port>] [--log <logfile>] [--db <database>]')
-    .default('port', 8080)
+    .default('port', 80)
     .default('log', 'treason.log')
     .default('db', 'treason_db')
     .argv;
