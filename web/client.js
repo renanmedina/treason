@@ -62,7 +62,7 @@ vm = {
     incorrectPassword: ko.observable(false), // True if the user tried to join the game with the wrong password.
     currentGame: ko.observable(''), // The id of the game currently shown in the join game modal dialog.
     gameInfo: ko.observable(), // Info about the game  currently shown in the join game modal dialog.
-    globalChatMessages: ko.observableArray(['Welcome to Treason Coup']), // The global chat messages that have been received.
+    globalChatMessages: ko.observableArray(['Welcome to Nanzin Coup']), // The global chat messages that have been received.
     globalMessage: ko.observable(''), // The message the user is typing into the global chat box.
     wantToStart: ko.observable(null), // The player clicked start, but not everyone is ready, so we're showing a confirm msg (holds the type of game the player wanted to start).
     playingGame: ko.observable(null), // The id of the game that we are currently playing, or null if there is no active game.
