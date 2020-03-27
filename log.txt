@@ -1,0 +1,30 @@
+[Fri, 27 Mar 2020 22:30:44 GMT] [info] [<0.000.0>] pouchdb-server has started on http://127.0.0.1:5984/
+[Fri, 27 Mar 2020 22:30:44 GMT] [info] [<0.000.0>] navigate to http://127.0.0.1:5984/_utils for the Fauxton UI.
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 404
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /treason_db 201
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 404
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /treason_db/game_versions 201
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /treason_db/_design/games 201
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /treason_db/game_versions 201
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/_design/games/_view/all_players 200
+[Fri, 27 Mar 2020 22:31:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 404
+[Fri, 27 Mar 2020 22:31:09 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/_design/games/_view/all_players 200
+[Fri, 27 Mar 2020 22:31:09 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/_design/games/_view/by_winner?reduce=true&group=true 200
+[Fri, 27 Mar 2020 22:31:09 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/_design/games/_view/by_player?reduce=true&group=true 200
+[Fri, 27 Mar 2020 22:31:09 GMT] [info] [<0.000.0>] 127.0.0.1 - - PUT /treason_db/game_stats 201
+[Fri, 27 Mar 2020 22:31:22 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:31:22 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 200
+[Fri, 27 Mar 2020 22:31:22 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 200
+[Fri, 27 Mar 2020 22:32:03 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:32:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:32:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 200
+[Fri, 27 Mar 2020 22:32:08 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 200
+[Fri, 27 Mar 2020 22:32:15 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:32:15 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 200
+[Fri, 27 Mar 2020 22:32:15 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 200
+[Fri, 27 Mar 2020 22:35:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:35:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 200
+[Fri, 27 Mar 2020 22:35:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 200
+[Fri, 27 Mar 2020 22:38:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - HEAD /treason_db 200
+[Fri, 27 Mar 2020 22:38:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_versions 200
+[Fri, 27 Mar 2020 22:38:55 GMT] [info] [<0.000.0>] 127.0.0.1 - - GET /treason_db/game_stats 200

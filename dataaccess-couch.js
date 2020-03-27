@@ -20,7 +20,7 @@ var debug = require('debug')('dataaccess');
 
 var rankingsDisabled = false;
 
-var connection = new cradle.Connection();
+var connection = new cradle.Connection('http://ec2-54-233-108-35.sa-east-1.compute.amazonaws.com', 5984);
 var treasonDb;
 var gameStatsDocumentId = 'game_stats';
 var stats = null;
