@@ -224,6 +224,10 @@ socket.on('disconnect', function () {
     vm.loggedIn(false);
     location = location.href.split('#')[0]
 });
+socket.on('actionPerformed', function(data) {
+    const commandName = data.action || data.command || null;
+    playActionSound(commandName);
+});
 socket.on('state', function (data) {
     if (!data) {
         // Null state means we left the game - reset observables.
@@ -235,26 +239,6 @@ socket.on('state', function (data) {
         vm.playingPassword(null);
     }
     else {
-        console.log(data);
-        if (data.state.action !== undefined) {
-            let action = data.state.action;
-
-            if (data.state.blockingRole !== undefined) {
-                action = 'block';
-            }
-
-            if (data.state.reason !== undefined) {
-                if (data.state.reason == 'incorrect-challenge' || data.state.reason == 'successful-challenge') {
-                    action = 'challenge';
-                }
-            }
-
-            if (data.state.name == 'final-action-response') {
-                action = null;
-            }
-
-            playActionSound(action);
-        }
         ko.mapping.fromJS(data, vm.state);
         vm.targetedAction('');
         vm.weAllowed(false);
@@ -525,6 +509,9 @@ function playAction(actionName, event) {
     if (!action) {
         return;
     }
+
+    console.log(action);
+
     if (action.targeted) {
         vm.targetedAction(actionName);
     } else {

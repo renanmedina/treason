@@ -50,6 +50,7 @@ function createNetPlayer(game, socket, playerName) {
 
     function onCommand(data) {
         try {
+            socket.emit('actionPerformed', data);
             if (gameProxy != null) {
                 gameProxy.command(data);
             }

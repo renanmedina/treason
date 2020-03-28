@@ -51,7 +51,8 @@
         BLOCK_RESPONSE: 'block-response',
         REVEAL_INFLUENCE: 'reveal-influence',
         EXCHANGE: 'exchange',
-        INTERROGATE: 'interrogate'
+        INTERROGATE: 'interrogate',
+        INCOME: 'income',
     };
 
     if (typeof window != 'undefined') {
