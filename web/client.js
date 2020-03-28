@@ -238,12 +238,15 @@ socket.on('state', function (data) {
         console.log(data);
         if (data.state.action !== undefined) {
             let action = data.state.action;
-            // if (data.state.blockingRole !== undefined) {
-            //     // if (data.state.name === 'block-response') {
-            //     //     action = 'block';
-            //     // } 
-            //     action = 'challenge';
-            // }
+            if (data.state.blockingRole !== undefined) {
+                action = 'block';
+            }
+
+            if (data.state.reason !== undefined) {
+                if (data.state.reason == 'incorrect-challenge' || data.state.reason == 'successful-challenge') {
+                    action = 'challenge';
+                }
+            }
             
             playActionSound(action);
         }
@@ -569,7 +572,7 @@ function playActionSound(action) {
         'exchange',   
         'interrogate',
         'income',    
-        'block',
+        // 'block',
         'challenge',
         'tax',
         'foreign-aid'
@@ -578,7 +581,6 @@ function playActionSound(action) {
     if (soundableCommands.indexOf(action) > -1) {
         const actionSound = new SoundEffect(`sounds/${action}.mp3`);
         actionSound.play();
-        console.log(action);
     }
 }
 
