@@ -510,8 +510,6 @@ function playAction(actionName, event) {
         return;
     }
 
-    console.log(action);
-
     if (action.targeted) {
         vm.targetedAction(actionName);
     } else {

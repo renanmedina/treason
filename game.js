@@ -390,6 +390,20 @@ module.exports = function createGame(options) {
         return influence;
     }
 
+    function emitActionPerformed (action) {
+        for (var i = 0; i < state.players.length; i++) {
+            emitActionPerformedAsync(i, action);
+        }
+    }
+
+    function emitActionPerformedAsync(playerIdx, action) {
+        setTimeout(function () {
+            if (playerIfaces[playerIdx] != null) {
+                playerIfaces[playerIdx].onActionPerformed(action);
+            }
+        }, 0);
+    }
+
     function emitState(emitStateChangeEvent) {
         if (state.state.name === stateNames.WAITING_FOR_PLAYERS
             || state.state.name === stateNames.START_OF_TURN
@@ -403,6 +417,7 @@ module.exports = function createGame(options) {
             emitStateAsync(i, masked);
         }
     }
+
 
     function emitStateAsync(playerIdx, state) {
         setTimeout(function () {
@@ -542,8 +557,6 @@ module.exports = function createGame(options) {
         return lodash.intersection(state.roles, lodash.flatten([roles]))[0];
     }
 
-    
-
     function command(playerIdx, command) {
         debug('command from player: ' + playerIdx);
         debug(command);
@@ -622,6 +635,7 @@ module.exports = function createGame(options) {
                 }
             }
             gameTracker.action(command.action, command.target);
+            emitActionPerformed(command);
             playerState.cash -= action.cost;
             if (action.roles == null && action.blockedBy == null) {
                 if (playAction(playerIdx, command, false)) {
@@ -666,13 +680,13 @@ module.exports = function createGame(options) {
                     throw new GameException('Action cannot be challenged');
                 }
                 challenge(playerIdx, state.state.playerIdx, getGameRole(action.roles));
-
+                emitActionPerformed({action: 'challenge'});
             } else if (state.state.name == stateNames.BLOCK_RESPONSE) {
                 if (playerIdx == state.state.target) {
                     throw new GameException('Cannot challenge your own block');
                 }
                 challenge(playerIdx, state.state.target, state.state.blockingRole);
-
+                emitActionPerformed({action: 'challenge'});
             } else {
                 throw new GameException('Incorrect state');
             }
@@ -739,6 +753,7 @@ module.exports = function createGame(options) {
                 addHistory(state.state.action, curTurnHistGroup(), state.state.message);
             }
             gameTracker.block(target, command.blockingRole);
+            emitActionPerformed({action: 'block'});
             setState({
                 name: stateNames.BLOCK_RESPONSE,
                 playerIdx: state.state.playerIdx,
@@ -748,7 +763,6 @@ module.exports = function createGame(options) {
                 message: format('{%d} attempted to block with ' + command.blockingRole, playerIdx)
             });
             resetAllows(playerIdx);
-
         } else if (command.command == 'allow') {
             if (playerState.influenceCount == 0) {
                 throw new GameException('Dead players cannot allow actions');
@@ -785,6 +799,7 @@ module.exports = function createGame(options) {
             // Return the other roles to the deck.
             deck = shuffle(deck.concat(unchosen));
             addHistory('exchange', curTurnHistGroup(), '{%d} exchanged roles', playerIdx);
+            emitActionPerformed({action: 'exchange'});
             nextTurn();
 
         } else if (command.command == 'interrogate') {
@@ -800,6 +815,8 @@ module.exports = function createGame(options) {
                 'interrogate',
                 curTurnHistGroup(),
                 format('{%d} saw your %s', playerIdx, state.state.confession));
+            
+            emitActionPerformed({action: 'interrogate'});
             if (command.forceExchange) {
                 var target = state.players[state.state.target];
                 var idx = indexOfInfluence(target, state.state.confession);
