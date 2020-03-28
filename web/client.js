@@ -235,6 +235,17 @@ socket.on('state', function (data) {
         vm.playingPassword(null);
     }
     else {
+        if (data.state.action !== undefined) {
+            let action = data.state.action;
+            if (data.state.blockingRole !== undefined) {
+                // if (data.state.name === 'block-response') {
+                //     action = 'block';
+                // } 
+                action = 'challenge';
+            }
+            
+            playActionSound(action);
+        }
         ko.mapping.fromJS(data, vm.state);
         vm.targetedAction('');
         vm.weAllowed(false);
@@ -522,13 +533,54 @@ function playTargetedAction(target) {
         target: target
     });
 }
+
+function SoundEffect(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    
+    this.play = function(){
+      this.sound.play();
+    }
+
+    this.stop = function(){
+      this.sound.pause();
+    }
+}
+
 function command(command, options) {
     var data = $.extend({
         command: command,
         stateId: vm.state.stateId()
     }, options);
+
     socket.emit('command', data);
 }
+
+function playActionSound(action) {
+    const soundableCommands = [    
+        'assassinate',
+        'coup',
+        'steal',     
+        'exchange',   
+        'interrogate',
+        'income',    
+        'block',
+        'challenge',
+        'tax',
+        'foreign-aid'
+    ];
+
+    if (soundableCommands.indexOf(action) > -1) {
+        const actionSound = new SoundEffect(`sounds/${action}.mp3`);
+        actionSound.play();
+        console.log(action);
+    }
+}
+
 function weCanBlock() {
     if (!weAreAlive()) {
         return false;

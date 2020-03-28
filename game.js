@@ -542,11 +542,14 @@ module.exports = function createGame(options) {
         return lodash.intersection(state.roles, lodash.flatten([roles]))[0];
     }
 
+    
+
     function command(playerIdx, command) {
         debug('command from player: ' + playerIdx);
         debug(command);
         var i, action, message;
         var playerState = state.players[playerIdx];
+
         if (playerState == null) {
             throw new GameException('Unknown player');
         }
