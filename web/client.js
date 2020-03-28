@@ -235,14 +235,15 @@ socket.on('state', function (data) {
         vm.playingPassword(null);
     }
     else {
+        console.log(data);
         if (data.state.action !== undefined) {
             let action = data.state.action;
-            if (data.state.blockingRole !== undefined) {
-                // if (data.state.name === 'block-response') {
-                //     action = 'block';
-                // } 
-                action = 'challenge';
-            }
+            // if (data.state.blockingRole !== undefined) {
+            //     // if (data.state.name === 'block-response') {
+            //     //     action = 'block';
+            //     // } 
+            //     action = 'challenge';
+            // }
             
             playActionSound(action);
         }
