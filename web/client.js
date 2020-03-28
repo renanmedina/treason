@@ -238,6 +238,7 @@ socket.on('state', function (data) {
         console.log(data);
         if (data.state.action !== undefined) {
             let action = data.state.action;
+
             if (data.state.blockingRole !== undefined) {
                 action = 'block';
             }
@@ -247,7 +248,11 @@ socket.on('state', function (data) {
                     action = 'challenge';
                 }
             }
-            
+
+            if (data.state.name == 'final-action-response') {
+                action = null;
+            }
+
             playActionSound(action);
         }
         ko.mapping.fromJS(data, vm.state);
@@ -565,6 +570,10 @@ function command(command, options) {
 }
 
 function playActionSound(action) {
+    if (action) {
+        return;
+    }
+
     const soundableCommands = [    
         'assassinate',
         'coup',
