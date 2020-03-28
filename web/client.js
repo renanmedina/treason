@@ -570,7 +570,7 @@ function command(command, options) {
 }
 
 function playActionSound(action) {
-    if (action) {
+    if (!action) {
         return;
     }
 
